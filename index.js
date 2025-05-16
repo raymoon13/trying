@@ -5,17 +5,16 @@ import express from 'express';
 import pool from './db.js';
 
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static('public'));
+
+
 // A simple proxy/scrape route
 app.get('/', async (req, res) => {
-  try {
-    res.send('Hello from the API proxy!');
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })  
 
 
